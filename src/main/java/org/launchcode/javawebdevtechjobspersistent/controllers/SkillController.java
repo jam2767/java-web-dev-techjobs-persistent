@@ -18,9 +18,9 @@ public class SkillController {
     private SkillRepository skillRepository;
 
     @GetMapping
-    public String index(Model model) {
+    public String displayAllSkills(Model model) {
         model.addAttribute("skill", skillRepository.findAll());
-        return "skills";
+        return "skills/index";
     }
 
     @GetMapping("add")

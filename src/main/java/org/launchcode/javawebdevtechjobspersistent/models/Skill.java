@@ -7,15 +7,15 @@ import javax.validation.constraints.Size;
 public class Skill extends AbstractEntity {
 
     @Size(max = 300)
-    private String Skill;
+    private String description;
 
     public Skill() {}
 
-    public String getSkill() {
-        return Skill;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSkill(String skill) {
-        Skill = skill;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
