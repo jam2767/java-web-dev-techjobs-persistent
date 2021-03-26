@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Job extends AbstractEntity{
 
-    @OneToMany
+    @ManyToOne
     private Employer employer;
 
     private String skills;
