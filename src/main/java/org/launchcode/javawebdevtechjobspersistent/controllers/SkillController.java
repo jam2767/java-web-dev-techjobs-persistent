@@ -42,16 +42,19 @@ public class SkillController {
         return "redirect:";
     }
 
-    @GetMapping("view/{skillId}")
+    @GetMapping("skills/view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
 
-        Optional optSkill = skillRepository.findById(skillId);
-        if (optSkill.isPresent()) {
-            Skill skill = (Skill) optSkill.get();
-            model.addAttribute("skills", skill);
-            return "skills/view";
-        } else {
-            return "redirect:../";
-        }
+        //Optional optSkill = skillRepository.findById(skillId);
+//        if (optSkill.isPresent()) {
+//            Skill skill = (Skill) optSkill.get();
+//            model.addAttribute("skills", skill);
+//            return "skills/view";
+//        } else {
+//            return "redirect:../";
+//        }
+        Skill skill = skillRepository.findById(skillId).get();
+        model.addAttribute("skill", skill);
+        return "skills/view";
     }
 }

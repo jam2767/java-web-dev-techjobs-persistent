@@ -43,16 +43,22 @@ public class EmployerController {
         return "redirect:";
     }
 
-    @GetMapping("view/{employerId}")
+//    @GetMapping("view/{employerId}")
+//    public String displayViewEmployer(Model model, @PathVariable int employerId) {
+//
+//        Optional optEmployer = employerRepository.findById(employerId);
+//        if (optEmployer.isPresent()) {
+//            Employer employer = (Employer) optEmployer.get();
+//            model.addAttribute("employers", employer);
+//            return "employers/view";
+//        } else {
+//            return "redirect:../";
+//        }
+//    }
+    @GetMapping("employers/view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
-
-        Optional optEmployer = employerRepository.findById(employerId);
-        if (optEmployer.isPresent()) {
-            Employer employer = (Employer) optEmployer.get();
-            model.addAttribute("employers", employer);
-            return "employers/view";
-        } else {
-            return "redirect:../";
-        }
+        Employer employer = employerRepository.findById(employerId).get();
+        model.addAttribute("employer",employer);
+        return "employers/view";
     }
 }

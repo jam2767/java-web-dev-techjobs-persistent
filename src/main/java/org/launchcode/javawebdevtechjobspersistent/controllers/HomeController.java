@@ -37,6 +37,7 @@ public class HomeController {
         if (employerId == null) {
             model.addAttribute("title", "My Jobs");
             model.addAttribute("employers", employerRepository.findAll());
+            model.addAttribute("jobs", jobRepository.findAll());
         } else {
             Optional<Employer> result = employerRepository.findById(employerId);
             if (result.isEmpty()) {
@@ -87,40 +88,81 @@ public class HomeController {
 
     }
 
-//    @GetMapping("view/{jobId}")
-//    public String displayViewJob(Model model, @PathVariable int jobId) {
-//        Optional optJob = jobRepository.findById(jobId);
-//        if (optJob.isPresent()) {
-//            Job job = (Job) optJob.get();
-//            model.addAttribute("job", job);
-//            return "view";
+    @GetMapping("view/{jobId}")
+    public String displayViewJob(Model model, @PathVariable int jobId) {
+        Optional optJob = jobRepository.findById(jobId);
+        if (optJob.isPresent()) {
+            Job job = (Job) optJob.get();
+            model.addAttribute("job", job);
+            return "view";
+        } else {
+            return "redirect:../";
+        }
+    }
+
+//    @GetMapping("employers/view/{employerId}")
+//    public String displayViewEmployer(Model model, @PathVariable int employerId) {
+//        Optional optEmployer = employerRepository.findById(employerId);
+//        if (optEmployer.isPresent()) {
+//            Employer employer = (Employer) optEmployer.get();
+//            model.addAttribute("employers", employer);
+//            return "employers/view";
 //        } else {
 //            return "redirect:../";
 //        }
 //    }
 
-
-    @GetMapping("view/{Id}")
-    public String displayView(Model model, @PathVariable int Id) {
-        Optional optJob = jobRepository.findById(Id);
-        Optional optEmployer = employerRepository.findById(Id);
-        Optional optSkill = skillRepository.findById(Id);
-
-        if (optJob.isPresent()) {
-            Job job = (Job) optJob.get();
-            model.addAttribute("job", job);
-            return "view";
-        } else if (optEmployer.isPresent()) {
-            Employer employer = (Employer) optEmployer.get();
-            model.addAttribute("employers", employer);
-            return "employers/view";
-        } else if (optSkill.isPresent()) {
-            Skill skill = (Skill) optSkill.get();
-            model.addAttribute("skills", skill);
-            return "skills/view";
-        } else {
-            return "redirect:../";
-        }
+    @GetMapping("employers/view/{employerId}")
+    public String displayViewEmployer(Model model, @PathVariable int employerId) {
+        Employer employer = employerRepository.findById(employerId).get();
+        model.addAttribute("employer",employer);
+        return "employers/view";
     }
+
+//    @GetMapping("skills/view/{skillId}")
+//    public String displayViewSkill(Model model, @PathVariable int skillId) {
+//        Skill skill = skillRepository.findById(skillId).get();
+//        model.addAttribute("skill", skill);
+//        return "skills/view";
+//    }
+
+    @GetMapping("skills/view/{skillId}")
+    public String displayViewSkill(Model model, @PathVariable int skillId) {
+
+        //Optional optSkill = skillRepository.findById(skillId);
+//        if (optSkill.isPresent()) {
+//            Skill skill = (Skill) optSkill.get();
+//            model.addAttribute("skills", skill);
+//            return "skills/view";
+//        } else {
+//            return "redirect:../";
+//        }
+        Skill skill = skillRepository.findById(skillId).get();
+        model.addAttribute("skill", skill);
+        return "skills/view";
+    }
+
+//    @GetMapping("view/{Id}")
+//    public String displayView(Model model, @PathVariable int Id) {
+//        Optional optJob = jobRepository.findById(Id);
+//        Optional optEmployer = employerRepository.findById(Id);
+//        Optional optSkill = skillRepository.findById(Id);
+//
+//        if (optJob.isPresent()) {
+//            Job job = (Job) optJob.get();
+//            model.addAttribute("job", job);
+//            return "view";
+//        } else if (optEmployer.isPresent()) {
+//            Employer employer = (Employer) optEmployer.get();
+//            model.addAttribute("employers", employer);
+//            return "employers/view";
+//        } else if (optSkill.isPresent()) {
+//            Skill skill = (Skill) optSkill.get();
+//            model.addAttribute("skills", skill);
+//            return "skills/view";
+//        } else {
+//            return "redirect:../";
+//        }
+//    }
 
 }
